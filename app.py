@@ -48,6 +48,7 @@ st.markdown(
     .your-turn {text-align:center; font-size:1.25rem; font-weight:650; color:#173b5f; animation: reveal 1s ease 1.4s both;}
     .mission {padding: 1.2rem 1.3rem; border-left: 6px solid #6a4bbc; background:#f5f1ff; border-radius:12px;}
     .step-ok {padding: 1rem 1.2rem; border-left: 6px solid #2e7d32; background:#edf7ee; border-radius:12px;}
+    .question-title {font-size:1.35rem; line-height:1.4; font-weight:700; color:#173b5f; margin:1.15rem 0 .45rem;}
     @keyframes reveal {from {opacity:0; transform:translateY(12px)} to {opacity:1; transform:translateY(0)}}
     </style>
     """,
@@ -314,11 +315,17 @@ elif st.session_state.stage == 4:
                 else None
             ),
         )
+        st.markdown(
+            '<p class="question-title">Quali strumenti useresti più volentieri? '
+            'Puoi sceglierne più di uno.</p>',
+            unsafe_allow_html=True,
+        )
         tools = st.multiselect(
-            "Quali strumenti useresti più volentieri? Puoi sceglierne più di uno.",
+            "Strumenti preferiti",
             LEARNING_TOOLS,
             default=st.session_state.learning_tools,
             placeholder="Scegli i mezzi che preferisci",
+            label_visibility="collapsed",
         )
         submitted = st.form_submit_button("Continua", type="primary", use_container_width=True)
     if submitted:
