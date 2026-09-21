@@ -30,6 +30,7 @@ from progress_store import ProgressStore, ProgressStoreError
 
 BASE_DIR = Path(__file__).parent
 VIDEO_PATH = BASE_DIR / "assets" / "video_cuscinetti.mp4"
+QR_PATH = BASE_DIR / "assets" / "QR_lezione_cuscinetti.png"
 
 st.set_page_config(
     page_title="Esploriamo i cuscinetti",
@@ -257,6 +258,13 @@ if st.session_state.stage == 0:
     if st.button("Inizia l'esplorazione →", type="primary", use_container_width=True):
         go_to(1)
         st.rerun()
+    if QR_PATH.exists():
+        st.divider()
+        st.subheader("Apri la lezione dal cellulare")
+        st.write("Inquadra questo QR code per entrare direttamente nella lezione.")
+        qr_left, qr_center, qr_right = st.columns([1, 2, 1])
+        with qr_center:
+            st.image(str(QR_PATH), use_container_width=True)
 
 elif st.session_state.stage == 1:
     st.subheader("1. Guarda il video")
